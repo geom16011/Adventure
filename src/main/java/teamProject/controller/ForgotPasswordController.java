@@ -45,6 +45,7 @@ public class ForgotPasswordController {
     public String processForgotPasswordForm(HttpServletRequest request,Model model){
         String username = request.getParameter("username");
         String token = RandomString.make(45);
+        System.out.println("token:"+token);
         try {
             String email = credentialsService.updateResetPasswordToken(token, username);
             String resetPasswordLink = Utility.getSiteUrl(request) + "/reset_password?token=" + token;

@@ -7,10 +7,13 @@
 $(document).ready(function () {
 
     const queryString = window.location.search;
+   
     const urlParams = new URLSearchParams(queryString);
+    
     const values = urlParams.values();
     const keys = urlParams.keys();
     const entries = urlParams.entries();
+   
     firstloads();
     function firstloads() {
 
@@ -18,9 +21,10 @@ $(document).ready(function () {
         var query = '';
         var varia = '';
         for (const entry of entries) {
-
             if (entry[1] !== '') {
                 checknullvalues = false;
+                
+                
                 varia = `${entry[0]}: ${entry[1]}`;
             }
             if (query === '' && varia !== '') {
@@ -28,11 +32,14 @@ $(document).ready(function () {
             } else if (query !== '' && varia !== '') {
                 query = query + " AND " + varia;
             }
+            varia='';
         }
+        //alert(query)
         query = query + " AND remainingPositions>0";
 
         if (checknullvalues === true) {
             $.getJSON("/Adventure/event/search/all", function (results) {
+               
                 createpoints(results);
             });
         } else {
@@ -111,6 +118,7 @@ $(document).ready(function () {
                 } else if ($(obj).attr('type') === "number") {
                     varia = $(obj).attr("name") + "<" + $(obj).val();
                 } else if ($(obj).attr('type') === "date") {
+                    alert("date")
                     varia = $(obj).attr("name") + ":" + $(obj).val();
                 } else if ($(obj).is('select')) {
                     varia = $(obj).attr("name") + ":" + $(obj).val();
@@ -160,7 +168,7 @@ $(document).ready(function () {
                     "</div> " +
                     "</div> " +
                     "</div>";
-             eventDate = new Date(results[i].startingDate);
+            eventDate = new Date(results[i].startingDate);
             if (today<eventDate){
                 availableEvents = availableEvents + 1;
             points.push({name: results[i].name, x: results[i].locationId.coordinateX,
@@ -168,6 +176,7 @@ $(document).ready(function () {
                 start: results[i].startingDate,
                 end: results[i].endingDate,
                 type: results[i].categoryId.categoryName});
+            
             $('#events').append(row);
         }
         }

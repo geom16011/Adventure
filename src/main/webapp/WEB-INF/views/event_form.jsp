@@ -69,11 +69,13 @@
                                     <c:set var = "positions" scope = "request" value = "1"/>
                                 </c:if>
                                 <c:if test="${event.remainingPositions!=event.positions}">
+                          
                                     <c:set var = "positions" scope = "request" value = "${event.remainingPositions}"/>
                                 </c:if>
                             </c:if>
 
                             <form:form action="/Adventure/${link}" id="form" method="POST" modelAttribute="event">
+                       
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="name">Ονόμα δραστηριότητας</label>

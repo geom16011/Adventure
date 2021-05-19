@@ -20,6 +20,7 @@ public class AuthenticationController {
     public String showRegisterPage(@ModelAttribute("customer") Customer customer, @ModelAttribute("company") Company company,
             Model model, HttpServletRequest request) {
         model.addAttribute("custEmailExist", request.getParameter("custEmailExist"));
+        System.out.println("emailexist:"+request.getParameter("custEmailExist"));
         model.addAttribute("custUsernameExist", request.getParameter("custUsernameExist"));
         model.addAttribute("compEmailExist", request.getParameter("compEmailExist"));
         model.addAttribute("compUsernameExist", request.getParameter("compUsernameExist"));
